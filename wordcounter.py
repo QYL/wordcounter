@@ -1,5 +1,12 @@
 #!/usr/bin/env python
 #-*- coding:utf-8 -*-
+# ---------------------------------------
+# a production of Qiu Yuanle(aka Le.py) #
+# Created on 2013-5-26 01:56:03         #
+# ---------------------------------------
+# 
+
+
 import re
 import urllib
 import codecs
@@ -85,6 +92,7 @@ def make_file(author,title,time,article_count):
     txt.close()
 
 def count(start,end,author):
+	
     print u'正在统计......'
     #print start,end,author
     article_id_list = article_id(start,end)
@@ -121,7 +129,14 @@ def count(start,end,author):
     print "Done with "+author+"!"
 
 if __name__ == '__main__':
-	
+	print u'''
+		     WORD COUNTER FOR TECH2IPO
+		     
+	    # --------------------------------------#
+            # a production of Qiu Yuanle(aka Le.py) #
+            # Created on 2013-5-25 13:56:03         #
+            # --------------------------------------#
+	'''
 	import sys 
 	reload(sys) 
 	sys.setdefaultencoding('utf8')
