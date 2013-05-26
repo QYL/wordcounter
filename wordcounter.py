@@ -19,7 +19,9 @@ def get_author_list():
 	try:
 		author_list = open("C:\\author.txt").read().split("#")
 	except:
-		print "Failed to open author.txt."
+		print "Error#798CD68"
+		q = input('''Failed to open author.txt.\nPlease create a txt file named author in C:\ and write the author's name in it.\nIf there are more than one name please seperate them by #.\nPress any key to quit.
+			''')
 	return author_list
 
 AUTHOR_LIST =  get_author_list()
@@ -146,11 +148,14 @@ if __name__ == '__main__':
 	import sys 
 	reload(sys) 
 	sys.setdefaultencoding('utf8')
+
 	start_id = input("please enter the start id:")
 	end_id = input("please enter the end id:")
+
 	for author_i in range(0,len(AUTHOR_LIST)):
 		author = AUTHOR_LIST[author_i]
 		if os.path.isfile("C:\\"+author+".txt"): 
 			os.remove("C:\\"+author+".txt")
 		count(start_id,end_id,author)
+		
 	quit = input("Press any key to quit.")
