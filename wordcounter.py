@@ -44,12 +44,18 @@ def get_webpage(url):
 
 def get_aticle(page_for_article):
     reg_art = r'(?s)(?=<section id="article-content">).*?(?<=<div class="articleTag">)'
-    article = re.findall(reg_art, page_for_article)[0]
+    if re.findall(reg_art, page_for_article):
+    	article = re.findall(reg_art, page_for_article)[0]
+    else:
+    	article = None
     return article
 
 def get_author(page_for_at):
     reg_author =r'class="author">.*?</'
-    author = str(re.findall(reg_author, page_for_at)[0]).split(">")[1].split("<")[0]
+    if re.findall(reg_author, page_for_at):
+    	author = str(re.findall(reg_author, page_for_at)[0]).split(">")[1].split("<")[0]
+    else:
+    	author = None
     return author
 
 def get_title(page_for_at):
