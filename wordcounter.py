@@ -4,8 +4,6 @@
 # a production of Qiu Yuanle(aka Le.py) #
 # Created on 2013-5-26 01:56:03         #
 # ---------------------------------------
-# 
-
 
 import re
 import urllib
@@ -17,9 +15,9 @@ BASE_URL = 'http://tech2ipo.com/'
 
 def get_author_list():
 	try:
-		author_list = open("C:\\author.txt").read().split("#")
+		author_list = codecs.open("C:\\author.txt","r","utf-8-sig").read().split("#")
 	except:
-		print "Error#798CD68"
+		print "Error#798CD68\n"
 		q = input('''Failed to open author.txt.\nPlease create a txt file named author in C:\ and write the author's name in it.\nIf there are more than one name please seperate them by #.\nPress any key to quit.
 			''')
 	return author_list
@@ -40,7 +38,7 @@ def make_url(article_id): #need a list
     return url
 
 def get_webpage(url):
-    page_for_article = urllib.urlopen(url).read().decode('utf-8')
+    page_for_article = urllib.urlopen(url).read().decode('utf8')
     page_for_at = urllib.urlopen(url).read()
     return page_for_article, page_for_at
 
@@ -56,6 +54,7 @@ def get_author(page_for_at):
     reg_author =r'class="author">.*?</'
     if re.findall(reg_author, page_for_at):
     	author = str(re.findall(reg_author, page_for_at)[0]).split(">")[1].split("<")[0]
+    	#print author
     else:
     	author = None
     return author
@@ -114,6 +113,7 @@ def count(start,end,author):
         page_for_article, page_for_at = get_webpage(url_list[i])
         try:
             author_get = get_author(page_for_at)
+            #print u"author_get:"+author_get
         except Exception, e:
             pass
         if author_get == author:
@@ -135,7 +135,7 @@ def count(start,end,author):
     txt.write(u"标题总字数："+str(TITLE_COUNT)+" "+u"正文总字数："+str(TOTAL_WORDS)+"\n\n")
     txt.close()
     print "Done with "+author+"!"
-
+    #print "Done."
 if __name__ == '__main__':
 	print u'''
 		     WORD COUNTER FOR TECH2IPO
@@ -152,10 +152,15 @@ if __name__ == '__main__':
 	start_id = input("please enter the start id:")
 	end_id = input("please enter the end id:")
 
+	#print "AUTHOR_LIST:",AUTHOR_LIST
+
 	for author_i in range(0,len(AUTHOR_LIST)):
 		author = AUTHOR_LIST[author_i]
+		#print author
 		if os.path.isfile("C:\\"+author+".txt"): 
 			os.remove("C:\\"+author+".txt")
 		count(start_id,end_id,author)
 		
 	quit = input("Press any key to quit.")
+
+
